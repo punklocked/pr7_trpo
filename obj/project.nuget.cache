@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "gGhCgnMEzZ5F2c8MJ7lVxcZjSqDjibDILdziMbjQrVbAhhQ6eOuF+Xv3vvLXMuC1gIA9AAQwWPbkhJm+uCRBZw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\st310-11\\Desktop\\pr7_trpo_nab\\pr7_trpo_nab.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\st310-11\\.nuget\\packages\\materialdesigncolors\\5.4.0\\materialdesigncolors.5.4.0.nupkg.sha512",
+    "C:\\Users\\st310-11\\.nuget\\packages\\materialdesignthemes\\5.4.0\\materialdesignthemes.5.4.0.nupkg.sha512",
+    "C:\\Users\\st310-11\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.142\\microsoft.xaml.behaviors.wpf.1.1.142.nupkg.sha512"
+  ],
+  "logs": []
+}
