@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using pr7_trpo_nab.Models;
 
@@ -12,19 +13,33 @@ namespace pr7_trpo_nab.Services
     public class CourseApiService
     {
         private readonly HttpClient httpClient = new HttpClient();
+        private static readonly JsonSerializerOptions JsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public CourseApiService()
         {
-            httpClient.BaseAddress = new Uri("https://localhost:7038/");
+            httpClient.BaseAddress = new Uri("https://localhost:7141/");
             httpClient.Timeout = TimeSpan.FromSeconds(10);
         }
 
-        // TODO
+        public async Task<List<Course>> GetCoursesAsync(string? teacher, int? minDuration)
+        {
+            var parts = new List<string>();
 
-        //public async Task<List<Course>> GetCoursesAsync(string? teacher, int? minDuration)
-        //{
-            
-        //}
+            if (!string.IsNullOrWhiteSpace(teacher))
+                parts.Add("teacher=" + Uri.EscapeDataString(teacher.Trim()));
+            if (minDuration.HasValue)
+                parts.Add("minDuration=" + minDuration.Value);
+
+            var url = "api/v1/course" + (parts.Count > 0 ? "?" + string.Join("&", parts) : "");
+            var response = await httpClient.GetFromJsonAsync<List<Course>>(url, JsonOptions);
+            if (response != null)
+                return response;
+
+            return new List<Course>();
+        }
 
         public async Task<Course> GetCourseAsync(int id)
         {
@@ -57,15 +72,13 @@ namespace pr7_trpo_nab.Services
                 throw new ApiException($"Ошибка: {response.StatusCode}");
         }
 
-        // TODO
+        public async Task PatchCourseAsync(int id, IDictionary<string, object?> fields)
+        {
+            HttpResponseMessage response = await httpClient.PatchAsJsonAsync($"api/v1/course/{id}", fields);
 
-        //public async Task PatchCourseAsync(Course course)
-        //{
-        //    HttpResponseMessage response = await httpClient.PutAsJsonAsync($"api/v1/course/{course.Id}", course);
-
-        //    if (!response.IsSuccessStatusCode)
-        //        throw new ApiException($"Ошибка: {response.StatusCode}");
-        //}
+            if (!response.IsSuccessStatusCode)
+                throw new ApiException($"Ошибка: {response.StatusCode}");
+        }
 
         public async Task DeleteCourseAsync(int id)
         {

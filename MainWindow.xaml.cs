@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Windows;
+using pr7_trpo_nab.Pages;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -19,6 +20,8 @@ namespace pr7_trpo_nab
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            MainFrame.Navigate(new ListPage(this));
         }
     }
 }

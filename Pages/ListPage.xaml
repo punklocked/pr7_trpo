@@ -1,0 +1,75 @@
+﻿<Page x:Class="pr7_trpo_nab.Pages.ListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:pr7_trpo_nab.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListPage">
+    <Grid Margin="12">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:Card Padding="12" Margin="0,0,0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Margin="0,0,8,0" materialDesign:HintAssist.Hint="Преподаватель" Text="{Binding Filter.Teacher, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Column="1" Margin="0,0,8,0" materialDesign:HintAssist.Hint="Мин. длительность" Text="{Binding Filter.MinDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="2" Content="Найти" Margin="0,0,8,0" Click="Load_Click"/>
+                        <Button Grid.Column="3" Content="Сбросить" Click="Reset_Click"/>
+                    </Grid>
+                </materialDesign:Card>
+
+                <materialDesign:Card Grid.Row="1" Padding="8">
+                    <DataGrid ItemsSource="{Binding Courses}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="45"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
+                            <DataGridTextColumn Header="Преподаватель" Binding="{Binding Teacher}" Width="*"/>
+                            <DataGridTextColumn Header="Часы" Binding="{Binding DurationHours}" Width="80"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=N2}" Width="80"/>
+                            <DataGridTextColumn Header="Активный" Binding="{Binding IsActive, Mode=OneWay}" Width="60"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </materialDesign:Card>
+            </Grid>
+
+            <StackPanel Grid.Column="2">
+                <materialDesign:Card Padding="12" Margin="0,0,0,8">
+                    <StackPanel>
+                        <TextBlock Text="Поиск по Id" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                        <TextBox materialDesign:HintAssist.Hint="id записи" Text="{Binding SearchId, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Content="Найти" Margin="0,8,0,0" Click="OpenById_Click"/>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <materialDesign:Card Padding="12">
+                    <StackPanel>
+                        <TextBlock Text="Действия" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                        <Button Content="Создать" Margin="0,0,0,8" Click="Create_Click"/>
+                        <Button Content="Изменить" Margin="0,0,0,8" Click="Edit_Click"/>
+                        <Button Content="Удалить" Background="Crimson" BorderBrush="Crimson" Click="Delete_Click"/>
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

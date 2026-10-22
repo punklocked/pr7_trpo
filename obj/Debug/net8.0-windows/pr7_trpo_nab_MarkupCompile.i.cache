@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\st310-11\Desktop\pr7_trpo_nab\App.xaml
-11407045341
+3-775847120
 22-1133588027
-9800794456
+12-669310068
 2011193454493
-MainWindow.xaml;
+MainWindow.xaml;Pages\EditPage.xaml;Pages\ListPage.xaml;
 
-False
+True
 

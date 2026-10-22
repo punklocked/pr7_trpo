@@ -10,9 +10,9 @@ namespace pr7_trpo_nab.Models
     {
         public int Id { get; set; }
 
-        public string Title { get; set; } = null!;
+        public string Title { get; set; } = "";
 
-        public string Teacher { get; set; } = null!;
+        public string Teacher { get; set; } = "";
 
         public int DurationHours { get; set; }
 
