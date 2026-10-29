@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pr7_trpo_nab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+568e45f632ac78afc88181cd2fac2234b988bc3d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("pr7_trpo_nab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pr7_trpo_nab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

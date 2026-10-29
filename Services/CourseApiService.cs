@@ -13,10 +13,6 @@ namespace pr7_trpo_nab.Services
     public class CourseApiService
     {
         private readonly HttpClient httpClient = new HttpClient();
-        private static readonly JsonSerializerOptions JsonOptions = new()
-        {
-            PropertyNameCaseInsensitive = true
-        };
 
         public CourseApiService()
         {
@@ -34,7 +30,7 @@ namespace pr7_trpo_nab.Services
                 parts.Add("minDuration=" + minDuration.Value);
 
             var url = "api/v1/course" + (parts.Count > 0 ? "?" + string.Join("&", parts) : "");
-            var response = await httpClient.GetFromJsonAsync<List<Course>>(url, JsonOptions);
+            var response = await httpClient.GetFromJsonAsync<List<Course>>(url);
             if (response != null)
                 return response;
 
@@ -50,8 +46,8 @@ namespace pr7_trpo_nab.Services
                 var course = await response.Content.ReadFromJsonAsync<Course>();
                 return course!;
             }
-            else
-                throw new ApiException($"Ошибка: {response.StatusCode}");
+
+            throw new Exception($"Ошибка {response.StatusCode}");
         }
 
         public async Task<Course> CreateCourseAsync(Course course)
@@ -60,8 +56,8 @@ namespace pr7_trpo_nab.Services
 
             if (response.IsSuccessStatusCode)
                 return await response.Content.ReadFromJsonAsync<Course>();
-            else
-                throw new ApiException($"Ошибка: {response.StatusCode}");
+
+            throw new Exception($"Ошибка {response.StatusCode}");
         }
 
         public async Task UpdateCourseAsync(Course course)
@@ -69,7 +65,7 @@ namespace pr7_trpo_nab.Services
             HttpResponseMessage response = await httpClient.PutAsJsonAsync($"api/v1/course/{course.Id}", course);
 
             if (!response.IsSuccessStatusCode)
-                throw new ApiException($"Ошибка: {response.StatusCode}");
+                throw new Exception($"Ошибка {response.StatusCode}");
         }
 
         public async Task PatchCourseAsync(int id, IDictionary<string, object?> fields)
@@ -77,7 +73,7 @@ namespace pr7_trpo_nab.Services
             HttpResponseMessage response = await httpClient.PatchAsJsonAsync($"api/v1/course/{id}", fields);
 
             if (!response.IsSuccessStatusCode)
-                throw new ApiException($"Ошибка: {response.StatusCode}");
+                throw new Exception($"Ошибка {response.StatusCode}");
         }
 
         public async Task DeleteCourseAsync(int id)
@@ -85,7 +81,7 @@ namespace pr7_trpo_nab.Services
             HttpResponseMessage response = await httpClient.DeleteAsync($"api/v1/course/{id}");
 
             if (!response.IsSuccessStatusCode)
-                throw new ApiException($"Ошибка: {response.StatusCode}");
+                throw new Exception($"Ошибка {response.StatusCode}");
         }
     }
 }

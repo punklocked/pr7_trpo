@@ -22,53 +22,45 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <materialDesign:Card Padding="12" Margin="0,0,0,8">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <TextBox Margin="0,0,8,0" materialDesign:HintAssist.Hint="Преподаватель" Text="{Binding Filter.Teacher, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Margin="0,0,8,0" materialDesign:HintAssist.Hint="Мин. длительность" Text="{Binding Filter.MinDuration, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Grid.Column="2" Content="Найти" Margin="0,0,8,0" Click="Load_Click"/>
-                        <Button Grid.Column="3" Content="Сбросить" Click="Reset_Click"/>
-                    </Grid>
-                </materialDesign:Card>
+                    <TextBox Margin="0,0,8,0" x:Name="TeacherFilter" materialDesign:HintAssist.Hint="Преподаватель" Text="{Binding Filter.Teacher, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="1" Margin="0,0,8,0" x:Name="MinDurationFilter" materialDesign:HintAssist.Hint="Мин. длительность" Text="{Binding Filter.MinDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Grid.Column="2" Content="Найти" Margin="0,0,8,0" Click="Load_Click"/>
+                    <Button Grid.Column="3" Content="Сбросить" Click="Reset_Click"/>
+                </Grid>
 
-                <materialDesign:Card Grid.Row="1" Padding="8">
-                    <DataGrid ItemsSource="{Binding Courses}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="45"/>
-                            <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
-                            <DataGridTextColumn Header="Преподаватель" Binding="{Binding Teacher}" Width="*"/>
-                            <DataGridTextColumn Header="Часы" Binding="{Binding DurationHours}" Width="80"/>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=N2}" Width="80"/>
-                            <DataGridTextColumn Header="Активный" Binding="{Binding IsActive, Mode=OneWay}" Width="60"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </materialDesign:Card>
+                <DataGrid Grid.Row="1" x:Name="CoursesDataGrid" ItemsSource="{Binding Courses}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="0,8,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="45"/>
+                        <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding="{Binding Teacher}" Width="*"/>
+                        <DataGridTextColumn Header="Часы" Binding="{Binding DurationHours}" Width="80"/>
+                        <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=N2}" Width="80"/>
+                        <DataGridTextColumn Header="Активный" Binding="{Binding IsActive, Mode=OneWay}" Width="60"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
 
             <StackPanel Grid.Column="2">
-                <materialDesign:Card Padding="12" Margin="0,0,0,8">
-                    <StackPanel>
-                        <TextBlock Text="Поиск по Id" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                        <TextBox materialDesign:HintAssist.Hint="id записи" Text="{Binding SearchId, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Content="Найти" Margin="0,8,0,0" Click="OpenById_Click"/>
-                    </StackPanel>
-                </materialDesign:Card>
+                <StackPanel>
+                    <TextBlock Text="Поиск по Id" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <TextBox materialDesign:HintAssist.Hint="id записи" x:Name="SearchIdBox" Text="{Binding SearchId, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Найти" Margin="0,8,0,0" Click="OpenById_Click"/>
+                </StackPanel>
 
-                <materialDesign:Card Padding="12">
-                    <StackPanel>
-                        <TextBlock Text="Действия" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                        <Button Content="Создать" Margin="0,0,0,8" Click="Create_Click"/>
-                        <Button Content="Изменить" Margin="0,0,0,8" Click="Edit_Click"/>
-                        <Button Content="Удалить" Background="Crimson" BorderBrush="Crimson" Click="Delete_Click"/>
-                    </StackPanel>
-                </materialDesign:Card>
+                <StackPanel>
+                    <TextBlock Text="Действия" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <Button Content="Создать" Margin="0,0,0,8" Click="Create_Click"/>
+                    <Button Content="Изменить" Margin="0,0,0,8" Click="Edit_Click"/>
+                    <Button Content="Удалить" Background="Crimson" BorderBrush="Crimson" Click="Delete_Click"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>
